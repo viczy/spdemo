@@ -44,7 +44,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.4'
 
 group :development do
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'rspec-rails'
 
   gem 'capistrano'
@@ -54,6 +54,7 @@ group :development do
   
 end
 
+gem 'sqlite3'
 gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'
