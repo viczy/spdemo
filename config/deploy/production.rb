@@ -45,7 +45,7 @@
 #   }
 
 
-set :stage, :test
+set :stage, :production
 set :branch, 'develop'
 
 server '192.168.33.10', user: 'vagrant', roles: %w{web app db}

@@ -5,7 +5,7 @@ set :application, 'spdemo'
 set :deploy_user, 'vagrant'
 
 set :scm, :git
-set :repo_url, 'git@bitbucket.org:viczy/spdemo.git'
+set :repo_url, 'https://github.com/viczy/spdemo.git'
 
 set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, '2.1.2'      # Defaults to: 'default'
@@ -15,10 +15,10 @@ set :rvm_ruby_version, '2.1.2'      # Defaults to: 'default'
 set :keep_releases, 5
 
 # files we want symlinking to specific entries in shared
-set :linked_files, %w{config/database.yml config/application.yml config/secrets.yml}
+#set :linked_files, %w{config/database.yml config/application.yml config/secrets.yml}
 
 # dirs we want symlinking to shared
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+#set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
