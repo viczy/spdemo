@@ -7,6 +7,19 @@ set :deploy_user, 'vagrant'
 set :scm, :git
 set :repo_url, 'git@bitbucket.org:viczy/spdemo.git'
 
+set :rvm_type, :user                     # Defaults to: :auto
+set :rvm_ruby_version, '2.1.2'      # Defaults to: 'default'
+#set :rvm_custom_path, '~/.myveryownrvm'  # only needed if not detected
+
+# how many old releases do we want to keep, not much
+set :keep_releases, 5
+
+# files we want symlinking to specific entries in shared
+set :linked_files, %w{config/database.yml config/application.yml config/secrets.yml}
+
+# dirs we want symlinking to shared
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
@@ -37,25 +50,30 @@ set :repo_url, 'git@bitbucket.org:viczy/spdemo.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  after :finishing, 'deploy:cleanup'
 end
+
+# namespace :deploy do
+
+#   desc 'Restart application'
+#   task :restart do
+#     on roles(:app), in: :sequence, wait: 5 do
+#       # Your restart mechanism here, for example:
+#       # execute :touch, release_path.join('tmp/restart.txt')
+#     end
+#   end
+
+#   after :publishing, :restart
+
+#   after :restart, :clear_cache do
+#     on roles(:web), in: :groups, limit: 3, wait: 10 do
+#       # Here we can do anything such as:
+#       # within release_path do
+#       #   execute :rake, 'cache:clear'
+#       # end
+#     end
+#   end
+
+# end
